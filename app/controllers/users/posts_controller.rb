@@ -1,4 +1,4 @@
-class PostsController < ApplicationController
+class Users::PostsController < ApplicationController
   def index
   end
 

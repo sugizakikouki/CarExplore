@@ -27,9 +27,10 @@ Rails.application.routes.draw do
         resources :reposts, only: [:create, :destroy]
         resources :tags, only: [:create, :destroy]
     end
-    
-    devise_scope :users do
-        post 'users/guest_sign_in', to: 'users/sessions#guest_sign_in'
+
+    devise_scope :user do
+        get '/users/guest_sign_in', to: 'users/sessions#guest_sign_in'
+        post '/users/guest_sign_in', to: 'users/sessions#guest_sign_in'
     end
     
     namespace :admins do
