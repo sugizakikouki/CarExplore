@@ -1,0 +1,27 @@
+<form action="/your_form_action_url" method="post">
+    <!-- アイコン追加部分 -->
+    <div class="account-page__inner--icon">
+        <div class="account-page__inner--icon__label"></div>
+        <div class="account-page__inner--icon__input">
+            <!-- RubyコードをHTMLに変換 -->
+            <!-- @image.present? の部分は非表示に -->
+            <img src="your_image_url" class="account-page__inner--icon__input__image" width="100%" alt="User Image">
+            <div class="account-page__inner--icon__input__image2"></div>
+            <!-- ファイルアップロード用のinputフィールド -->
+            <input type="file" name="user[image]" class="account-page__inner--icon__input__btn" id="upload-icon">
+        </div>
+    </div>
+        
+    <div class="account-page__inner--user-form">
+    <!-- プロフィール追加部分 -->
+        <div class="field">
+            <div class="field-label">
+                <label for="user_profile">Profile</label>
+            </div>
+            <div class="field-input">
+                <!-- テキストエリア -->
+                <textarea name="user[profile]" id="user_profile" autocomplete="off"></textarea>
+            </div>
+        </div>
+    </div>
+</form>

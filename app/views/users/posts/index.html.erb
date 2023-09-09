@@ -1,2 +1,13 @@
-<h1>Posts#index</h1>
-<p>Find me in app/views/posts/index.html.erb</p>
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <% @posts.each do |post| %>
+                <span><%= list.title %></span>
+            <% end %>
+            
+        </div>
+        <div class="col-md-4 offset-md-2">
+            
+        </div>
+    </div>
+</div>
