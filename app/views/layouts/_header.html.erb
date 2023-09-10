@@ -1,11 +1,12 @@
 <header>
-  <nav class="navbar navbar-expand-lg navbar-light" style="background-color:#deb887">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
+      <a class="navbar-brand" href="#">Navbar</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav ml-auto">
+        <ul class="navbar-nav">
         <% if admin_signed_in? %>
           <li>
             <%= link_to admin_items_path,class: 'nav-link text-light' do %>
@@ -34,12 +35,12 @@
           </li>
           <% elsif user_signed_in? %>
           <li>
-            <%= link_to current_user_path,class: 'nav-link text-light' do %>
+            <%= link_to current_user_path,class: 'nav-link' do %>
               <i class=""></i> My Page
             <% end %>
           </li>
           <li>
-            <%= link_to destroy_user_session_path, method: :delete,class: 'nav-link text-light' do %>
+            <%= link_to destroy_user_session_path, method: :delete,class: 'nav-link' do %>
               <i class=""></i> Log Out
             <% end %>
           </li>

@@ -6,6 +6,7 @@
     <div class="col-md-8">
       <div class="row">
         <h3><%= @user.name %></h3>
+        <h4><%= @user.profile %></h4>
         <%= link_to "Edit", current_user_edit_path, class: "btn btn-outline-dark common-btn edit-profile-btn" %>
         <button type="button" class="setting" data-toggle="modal" data-target="#exampleModal">
             <i class="fa-solid fa-gear" style="color: #6d6f74;"></i>
@@ -21,13 +22,6 @@
           </div>
         </div>
       </div>
-      <% if @user == current_user %>
-        <div class="row">
-          <p>
-            <%= @user.email %>
-          </p>
-        </div>
-      <% end %>
     </div>
   </div>
 </div>

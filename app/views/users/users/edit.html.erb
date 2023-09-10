@@ -1,27 +1,22 @@
-<form action="/your_form_action_url" method="post">
-    <!-- アイコン追加部分 -->
-    <div class="account-page__inner--icon">
-        <div class="account-page__inner--icon__label"></div>
-        <div class="account-page__inner--icon__input">
-            <!-- RubyコードをHTMLに変換 -->
-            <!-- @image.present? の部分は非表示に -->
-            <img src="your_image_url" class="account-page__inner--icon__input__image" width="100%" alt="User Image">
-            <div class="account-page__inner--icon__input__image2"></div>
-            <!-- ファイルアップロード用のinputフィールド -->
-            <input type="file" name="user[image]" class="account-page__inner--icon__input__btn" id="upload-icon">
-        </div>
-    </div>
-        
-    <div class="account-page__inner--user-form">
-    <!-- プロフィール追加部分 -->
-        <div class="field">
-            <div class="field-label">
-                <label for="user_profile">Profile</label>
-            </div>
-            <div class="field-input">
-                <!-- テキストエリア -->
-                <textarea name="user[profile]" id="user_profile" autocomplete="off"></textarea>
-            </div>
-        </div>
-    </div>
-</form>
+<%= form_with model: @user, url: current_user_path, local: true do |f| %>
+   <%= render 'users/shared/error_messages', object: f.object %>
+   <%= f.label :email %>
+   <%= f.email_field :email, class: 'form-control mb-3' %>
+
+   <%= f.label :username %>
+   <%= f.text_field :username, class: 'form-control mb-3' %>
+
+   <%= f.label :name %>
+   <%= f.text_field :name, class: 'form-control mb-3' %>
+
+   <%= f.label :image %>
+   <%= image_tag @user.image.url if @user.image? %>
+   <%= f.file_field :image,class: 'form-control mb-3', accept: 'image/*' %>
+   <%= f.hidden_field :image_cache %>
+   
+   <%= f.label :profile %>
+   <%= f.text_field :profile, class: 'form-control-lg mb-3' %>
+   
+
+   <%= f.submit "更新", class: "btn btn-primary"%>
+<%end%>
