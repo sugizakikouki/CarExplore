@@ -35,8 +35,13 @@
           </li>
           <% elsif user_signed_in? %>
           <li>
-            <%= link_to current_user_path,class: 'nav-link' do %>
+            <%= link_to current_user_path, class: 'nav-link' do %>
               <i class=""></i> My Page
+            <% end %>
+          </li>
+          <li>
+            <%= link_to posts_path, class: 'nav-link' do %>
+              <i class=""></i> Post
             <% end %>
           </li>
           <li>

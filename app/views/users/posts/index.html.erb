@@ -1,13 +1,26 @@
 <div class="container">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6 text-light">
             <% @posts.each do |post| %>
-                <span><%= list.title %></span>
+                <span><%= post.content %></span>
+                <% if post.images.attached? %>
+                    <% post.images.each do |image| %>
+                        <%= image_tag image, style: 'max-width: 100px; max-height: 100px;' %>
+                    <% end %>
+                <% end %>
             <% end %>
-            
         </div>
-        <div class="col-md-4 offset-md-2">
-            
+        <div class="col-md-4 offset-md-2 text-light">
+            <%= form_with model: @post do |f| %>
+                <div class="mt-3">
+                    <%= f.text_area :content, class: 'form-control', rows: 8, cols: 80  %>
+                </div>
+                <div class="mt-3">
+                    <h5>Image</h5>
+                    <%= f.file_field :images, multiple: true, accept: "image/*" %>
+                </div>
+                <button type="submit" class="btn-s btn-sm mt-3" style="width: 80px;">Post</button>
+            <% end %>
         </div>
     </div>
 </div>

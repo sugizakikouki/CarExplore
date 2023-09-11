@@ -1,22 +1,43 @@
 <%= form_with model: @user, url: current_user_path, local: true do |f| %>
    <%= render 'users/shared/error_messages', object: f.object %>
-   <%= f.label :email %>
-   <%= f.email_field :email, class: 'form-control mb-3' %>
-
-   <%= f.label :username %>
-   <%= f.text_field :username, class: 'form-control mb-3' %>
-
-   <%= f.label :name %>
-   <%= f.text_field :name, class: 'form-control mb-3' %>
-
-   <%= f.label :image %>
-   <%= image_tag @user.image.url if @user.image? %>
-   <%= f.file_field :image,class: 'form-control mb-3', accept: 'image/*' %>
-   <%= f.hidden_field :image_cache %>
-   
-   <%= f.label :profile %>
-   <%= f.text_field :profile, class: 'form-control-lg mb-3' %>
-   
-
-   <%= f.submit "更新", class: "btn btn-primary"%>
+   <form>
+      <div class="row col-md-4 mx-auto">
+         <div class="form-group my-auto">
+            <label class="text-light">
+               <%= f.label :username %>
+            </label>
+            <%= f.text_field :username, class: 'form-control mb-3' %>
+         </div>
+         <div class="form-group my-auto ml-3">
+            <label class="text-light">
+               <%= f.label :name %>
+            </label>
+            <%= f.text_field :name, class: 'form-control mb-3' %>
+         </div>
+         <div class="form-group my-auto">
+            <label class="text-light">
+               <%= f.label :email %>
+            </label>
+            <%= f.email_field :email, class: 'form-control mb-3' %>
+         </div>
+         <div class="form-group my-auto ml-3">
+            <label class="text-light">
+               <%= f.label :image %>
+            </label>
+            <div class="mb-3">
+               <%= image_tag @user.image.url, class: 'img-responsive', style: 'max-width: 100px; max-height: 100px;' if @user.image? %>
+            </div>
+            
+            <%= f.file_field :image,class: 'form-control mb-3', accept: 'image/*' %>
+            <%= f.hidden_field :image_cache %>
+         </div>
+         <div class="form-group my-auto">
+            <label class="text-light">
+               <%= f.label :profile %>
+            </label>
+            <%= f.text_area :profile, class: 'form-control', rows: 8, cols: 80 %>
+         </div>
+      </div>
+      <button type="submit" class="btn-s btn-sm mt-3">Update</button>
+   </form>
 <%end%>

@@ -1,26 +1,28 @@
-<div class="profile-wrap">
-  <div class="row">
-    <div class="col-md-4 text-center">
-      <%= image_tag current_user.image_url(:icon) %>
-    </div>
-    <div class="col-md-8">
-      <div class="row">
-        <h3><%= @user.name %></h3>
-        <h4><%= @user.profile %></h4>
-        <%= link_to "Edit", current_user_edit_path, class: "btn btn-outline-dark common-btn edit-profile-btn" %>
-        <button type="button" class="setting" data-toggle="modal" data-target="#exampleModal">
-            <i class="fa-solid fa-gear" style="color: #6d6f74;"></i>
-        </button>
-
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel"></h5>
-              </div>
-            </div>
-          </div>
-        </div>
+<div class="window">
+  <div class="overlay"></div>
+  <div class="box header">
+    <%= image_tag current_user.image_url(:icon) %>
+    <h2><%= @user.name %></h2>
+    <h4><%= @user.profile %></h4>
+    <ul>
+      <li><a href=""><span class="ion-ios-camera-outline"></span> 401</a></li>
+      <li><a href=""><span class="ion-ios-heart-outline"></span> 333K</a></li>
+      <li><a href=""><span class="ion-ios-person-outline"></span> 225M</a></li>
+    </ul>
+  </div>
+  <div class="box footer">
+    <a href="" class="btn">Follow</a>
+    <div class="dropdown">
+      <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa-solid fa-toolbox" style="color: #000000;"></i>
+      </a>
+    
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+        <a class="dropdown-item" href="#">
+          <%= link_to "Edit", current_user_edit_path %>
+        </a>
+        <a class="dropdown-item" href="#">Another action</a>
+        <a class="dropdown-item" href="#">Something else here</a>
       </div>
     </div>
   </div>
