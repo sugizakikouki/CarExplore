@@ -1,14 +1,44 @@
 <div class="container">
-    <div class="row">
+    <div class="row d-flex justify-content-between mt-5">
         <div class="col-md-6 text-light">
-            <% @posts.each do |post| %>
-                <span><%= post.content %></span>
-                <% if post.images.attached? %>
-                    <% post.images.each do |image| %>
-                        <%= image_tag image, style: 'max-width: 100px; max-height: 100px;' %>
-                    <% end %>
+            <table class="table text-light">
+                <tr>
+                    <th scope="col">name</th>
+                    <th scope="col">username</th>
+                    <th scope="col">content</th>
+                    <th scope="col">image</th>
+                </tr>
+                <% @posts.each do |post| %>
+                <tr>
+                    <td><%= post.user.name %></td>
+                    <td><%= post.user.username %></td>
+                    <td><%= post.content %></td>
+                    <td>
+                        <% if post.images.attached? %>
+                            <% post.images.each do |image| %>
+                                <div class="image-container" style="margin-right: 10px; margin-bottom: 10px;">
+                                    <%= image_tag image, class: 'img-fluid', style: 'max-width: 100px; max-height: 100px;' %>
+                                </div>
+                            <% end %>
+                        <% end %>
+                    </td>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Menu
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#"><%= link_to 'Show', post_path(post) %></a>
+                                <a class="dropdown-item" href="#">Action 2</a>
+                                <% if post.user == current_user %>
+                                    <a class="dropdown-item" href="#"><%= link_to 'Delete', post_path(post), method: :delete, data: { confirm: 'Are you sure?' } %></a>
+                                <% end %>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
                 <% end %>
-            <% end %>
+            </table>
         </div>
         <div class="col-md-4 offset-md-2 text-light">
             <%= form_with model: @post do |f| %>
@@ -24,3 +54,6 @@
         </div>
     </div>
 </div>
+
+
+
