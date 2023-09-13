@@ -15,15 +15,22 @@ Rails.application.routes.draw do
     
     scope module: :users do
         
-        get "current_user" => "users#show"
-        get "current_user/edit" => "users#edit"
-        patch "current_user" => "users#update"
-        resources :posts, only: [:index, :show, :create, :update, :destroy]
+        resources :users, only: [:show, :edit, :update] do
+            member do
+                get :follows, :followers
+            end
+            resource :relationships, only: [:create, :destroy]
+        end
+
+        resources :posts, only: [:index, :show, :create, :update, :destroy] do
+            resource :favorites, only: [:create, :destroy]
+            resources :comments, only: [:create, :destroy]
+        end
         resources :follows, only: [:create, :destroy]
         get 'followings' => 'relationships#followings', as: 'followings'
         get 'followers' => 'relationships#followers', as: 'followers'
-        resources :favorites, only: [:create, :destroy]
-        resources :comments, only: [:create, :destroy]
+        
+        
         resources :reposts, only: [:create, :destroy]
         resources :tags, only: [:create, :destroy]
     end

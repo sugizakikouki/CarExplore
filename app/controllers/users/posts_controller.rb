@@ -5,7 +5,9 @@ class Users::PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])  
+    @post = Post.find(params[:id])
+    @comment = Comment.new
+    @comments = Comment.all
   end
   
   def create

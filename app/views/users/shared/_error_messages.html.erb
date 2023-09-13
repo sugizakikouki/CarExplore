@@ -3,7 +3,7 @@
     <h2>
       <%= I18n.t("errors.messages.not_saved",
                  count: object.errors.count,
-                 object: object.class.model_name.human.downcase)
+                 resource: object.class.model_name.human.downcase)
        %>
     </h2>
     <ul>

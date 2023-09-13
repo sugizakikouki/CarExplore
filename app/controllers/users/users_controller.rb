@@ -1,9 +1,11 @@
 class Users::UsersController < ApplicationController
   def show
-    @user = current_user
+    @user = User.find(params[:id])
     @name = @user.name
     @image = @user.image
     @profile = @user.profile
+    @following_users = @user.following_users
+    @follower_users = @user.follower_users
   end
 
   def edit
