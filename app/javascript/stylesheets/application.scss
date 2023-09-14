@@ -94,6 +94,27 @@ img {
   vertical-align: middle;
 }
 
+.btn-c {
+  background: rgba(255,255,255,0.8);
+  border: 1px solid rgba(255,255,255,0.5);
+  border-radius: 40px;
+  color: rgba(0,0,0,0.75);
+  display: block;
+  font-size: 1em;
+  font-weight: 400;
+  height: 44px;
+  letter-spacing: 5px;
+  line-height: 42px;
+  margin: 10px auto;
+  padding: 0;
+  position: relative;
+  text-align: center;
+  text-transform: uppercase;
+  -webkit-transition: all .5s ease;
+  transition: all .5s ease;
+  vertical-align: middle;
+  width: 20%;
+}
 
 .btn:hover {
   background: rgba(0,0,0,0.1);
