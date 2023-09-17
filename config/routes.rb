@@ -26,6 +26,8 @@ Rails.application.routes.draw do
             resource :favorites, only: [:create, :destroy]
             resources :comments, only: [:create, :destroy]
         end
+        get 'reposts' => 'posts#repost_create'
+        
         resources :follows, only: [:create, :destroy]
         get 'followings' => 'relationships#followings', as: 'followings'
         get 'followers' => 'relationships#followers', as: 'followers'

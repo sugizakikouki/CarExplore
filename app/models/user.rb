@@ -12,6 +12,7 @@ class User < ApplicationRecord
 
   has_many :following_users, through: :followers, source: :followed
   has_many :follower_users, through: :followeds, source: :follower
+  
          
   def self.guest
     find_or_create_by!(email: 'guest@guest.com') do |user|
@@ -30,4 +31,6 @@ class User < ApplicationRecord
   def following?(user)
     following_users.include?(user)
   end
+  
+
 end

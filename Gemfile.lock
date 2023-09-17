@@ -102,6 +102,15 @@ GEM
     ffi (1.15.5)
     globalid (1.1.0)
       activesupport (>= 5.0)
+    haml (6.1.2)
+      temple (>= 0.8.2)
+      thor
+      tilt
+    haml-rails (2.1.0)
+      actionpack (>= 5.1)
+      activesupport (>= 5.1)
+      haml (>= 4.0.6)
+      railties (>= 5.1)
     i18n (1.14.1)
       concurrent-ruby (~> 1.0)
     image_processing (1.12.2)
@@ -217,6 +226,7 @@ GEM
       sprockets (>= 3.0.0)
     sqlite3 (1.6.4-x86_64-linux)
     ssrf_filter (1.1.2)
+    temple (0.10.2)
     thor (1.2.2)
     tilt (2.2.0)
     timeout (0.4.0)
@@ -259,6 +269,7 @@ DEPENDENCIES
   carrierwave (~> 2.0)
   devise
   dotenv-rails
+  haml-rails
   image_processing (~> 1.2)
   jbuilder (~> 2.7)
   listen (~> 3.3)

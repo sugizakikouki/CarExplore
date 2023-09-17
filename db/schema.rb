@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_09_14_091212) do
+ActiveRecord::Schema.define(version: 2023_09_17_073929) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -73,6 +73,7 @@ ActiveRecord::Schema.define(version: 2023_09_14_091212) do
     t.integer "user_id"
     t.text "content"
     t.string "image"
+    t.integer "repost_id"
   end
 
   create_table "relationships", force: :cascade do |t|
@@ -80,6 +81,15 @@ ActiveRecord::Schema.define(version: 2023_09_14_091212) do
     t.integer "followed_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "reposts", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "post_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["post_id"], name: "index_reposts_on_post_id"
+    t.index ["user_id"], name: "index_reposts_on_user_id"
   end
 
   create_table "tag_maps", force: :cascade do |t|
@@ -117,6 +127,8 @@ ActiveRecord::Schema.define(version: 2023_09_14_091212) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "reposts", "posts"
+  add_foreign_key "reposts", "users"
   add_foreign_key "tag_maps", "posts"
   add_foreign_key "tag_maps", "tags"
 end

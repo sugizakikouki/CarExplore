@@ -17,12 +17,18 @@
                         <%= @post.user.name %>
                     </td>
                     <td><%= @post.user.username %></td>
-                    <td><%= @post.content %></td>
+                    <td>
+                        <%= @post.content %><br>
+                        <p></p>
+                        <% @post.tags.each do |tag| %>
+                            <%= tag.tag_name %>
+                        <% end %>
+                    </td>
                     <td>
                         <% if @post.images.attached? %>
                             <% @post.images.each do |image| %>
                                 <div class="image-container" style="margin-right: 10px; margin-bottom: 10px;">
-                                    <%= image_tag image.variant(resize_to_limit: [300, 300]).processed, class: 'img-fluid', style: 'max-width: 100px; max-height: 100px;' %>
+                                    <%= image_tag image.variant(resize_to_limit: [1000, 1000]).processed, class: 'img-fluid', style: 'max-width: 100px; max-height: 100px;' %>
                                 </div>
                             <% end %>
                         <% end %>
@@ -37,8 +43,7 @@
                                 Menu
                             </button>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#">Action 1</a>
-                                <a class="dropdown-item" href="#">Action 2</a>
+                                <a class="dropdown-item" href="#"><%= link_to "Back", posts_path %></a>
                                 <% if @post.user == current_user %>
                                     <a class="dropdown-item" href="#"><%= link_to 'Delete', post_path(@post), method: :delete, data: { confirm: 'Are you sure?' } %></a>
                                 <% end %>
