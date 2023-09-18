@@ -1,7 +1,7 @@
 class Users::PostsController < ApplicationController
   def index
     @post = Post.new
-    @posts = Post.all
+    @posts = Post.page(params[:page])
   end
 
   def show
@@ -60,9 +60,17 @@ class Users::PostsController < ApplicationController
     redirect_to request.referer
   end
   
+  def search
+    @results = @a.result(distinct: true).page(params[:page]).per(10).order('created_at DESC')
+  end
+  
   private
   
   def post_params
     params.require(:post).permit(:content, images: [])
+  end
+  
+  def search_article
+    @a = Article.ransack(params[:q])
   end
 end

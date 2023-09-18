@@ -27,6 +27,7 @@ Rails.application.routes.draw do
             resources :comments, only: [:create, :destroy]
         end
         get 'reposts' => 'posts#repost_create'
+        get 'posts/search'
         
         resources :follows, only: [:create, :destroy]
         get 'followings' => 'relationships#followings', as: 'followings'
