@@ -27,7 +27,7 @@ Rails.application.routes.draw do
             resources :comments, only: [:create, :destroy]
         end
         get 'reposts' => 'posts#repost_create'
-        get 'posts/search'
+        get "search" => "posts#search"
         
         resources :follows, only: [:create, :destroy]
         get 'followings' => 'relationships#followings', as: 'followings'
@@ -36,6 +36,7 @@ Rails.application.routes.draw do
         
         resources :reposts, only: [:create, :destroy]
         resources :tags, only: [:create, :destroy]
+        resources :notifications, only: [:index, :destroy]
     end
 
     devise_scope :user do

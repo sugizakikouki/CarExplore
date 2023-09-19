@@ -1,4 +1,4 @@
-<%= form_with model: @user, url: current_user_path, local: true do |f| %>
+<%= form_with model: @user, url: user_path(current_user), method: :patch, local: true do |f| %>
    <%= render 'users/shared/error_messages', object: f.object %>
    <form>
       <div class="row col-md-4 mx-auto">

@@ -1,7 +1,18 @@
 class Users::PostsController < ApplicationController
   def index
     @post = Post.new
-    @posts = Post.page(params[:page])
+    @keyword = params[:keyword]
+  
+    # タグに関連する投稿を取得するか、すべての投稿を取得するかを決定
+    @posts = params[:tag_id].present? ? Tag.find(params[:tag_id]).posts : Post.all
+  
+    # キーワードでの検索が行われた場合、絞り込みを行う
+    if @keyword.present?
+      @posts = @posts.search(@keyword)
+    end
+  
+    # 投稿を最新のものから表示するために、created_at カラムを降順にソート
+    @posts = @posts.order(created_at: :desc).page(params[:page])
   end
 
   def show
@@ -60,17 +71,9 @@ class Users::PostsController < ApplicationController
     redirect_to request.referer
   end
   
-  def search
-    @results = @a.result(distinct: true).page(params[:page]).per(10).order('created_at DESC')
-  end
-  
   private
   
   def post_params
     params.require(:post).permit(:content, images: [])
-  end
-  
-  def search_article
-    @a = Article.ransack(params[:q])
   end
 end

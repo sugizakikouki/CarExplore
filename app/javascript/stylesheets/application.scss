@@ -116,6 +116,43 @@ img {
   width: 20%;
 }
 
+.btn-ss {
+  background: rgba(255,255,255,0.8);
+  border: 1px solid rgba(255,255,255,0.5);
+  border-radius: 40px;
+  color: rgba(0,0,0,0.75);
+  display: block;
+  font-size: 1em;
+  font-weight: 400;
+  height: 44px;
+  line-height: 42px;
+  position: relative;
+  text-align: center;
+  -webkit-transition: all .5s ease;
+  transition: all .5s ease;
+  vertical-align: middle;
+}
+
+.btn-n {
+  background: rgba(255,255,255,0.8);
+  border: 1px solid rgba(255,255,255,0.5);
+  border-radius: 40px;
+  color: rgba(0,0,0,0.75);
+  display: block;
+  font-size: 1em;
+  font-weight: 400;
+  height: 44px;
+  line-height: 42px;
+  margin: 10px auto;
+  padding: 0;
+  position: relative;
+  text-align: center;
+  -webkit-transition: all .5s ease;
+  transition: all .5s ease;
+  vertical-align: middle;
+}
+
+
 .btn:hover {
   background: rgba(0,0,0,0.1);
   border: 1px solid rgba(0,0,0,0.15);

@@ -17,10 +17,11 @@ class Users::UsersController < ApplicationController
   end
   
   def update
-    if current_user.update(user_params)
-      redirect_to current_user_path(current_user),success: "ユーザーを更新しました"
+    if @user.update(user_params)
+      flash[:success] = "updated successfully"
+      redirect_to user_path(current_user)
     else
-      flash.now[:danger] = "ユーザーを更新できませんでした"
+      flash.now[:danger] = "Failed to update"
       render :edit
     end
   end

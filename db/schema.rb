@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_09_17_073929) do
+ActiveRecord::Schema.define(version: 2023_09_19_093800) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -65,6 +65,21 @@ ActiveRecord::Schema.define(version: 2023_09_17_073929) do
     t.integer "post_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "notifications", force: :cascade do |t|
+    t.integer "visitor_id", null: false
+    t.integer "visited_id", null: false
+    t.integer "post_id", null: false
+    t.integer "comment_id", null: false
+    t.string "action"
+    t.boolean "checked"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["comment_id"], name: "index_notifications_on_comment_id"
+    t.index ["post_id"], name: "index_notifications_on_post_id"
+    t.index ["visited_id"], name: "index_notifications_on_visited_id"
+    t.index ["visitor_id"], name: "index_notifications_on_visitor_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -127,6 +142,10 @@ ActiveRecord::Schema.define(version: 2023_09_17_073929) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "notifications", "comments"
+  add_foreign_key "notifications", "posts"
+  add_foreign_key "notifications", "visiteds"
+  add_foreign_key "notifications", "visitors"
   add_foreign_key "reposts", "posts"
   add_foreign_key "reposts", "users"
   add_foreign_key "tag_maps", "posts"

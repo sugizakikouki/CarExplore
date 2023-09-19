@@ -1,0 +1,20 @@
+<div class="d-flex justify-content-end">
+  <%= form_with url: posts_path, method: :get, local: true, class: 'boards__searchForm' do |f|%>
+    <div class="input-group">
+      <%= f.text_field :keyword, value: @keyword, class: "form-control search-control", placeholder: "キーワードを入力" %>
+        <span class="input-group-btn input-group-append">
+          <%= button_tag type: "submit", class: "btn-ss btn-secondary search-btn" do %>
+            <i class="fas fa-search"></i> search</submit>
+          <% end %>
+        </span>
+    </div>
+
+      <%= select_tag :tag_id,
+        options_from_collection_for_select(Tag.all, :id, :tag_name, params[:tag_id]),
+          {
+            prompt: "タグで絞り込み検索",
+            onchange: "submit(this.form);"
+          }
+      %>
+  <% end %>
+</div>
