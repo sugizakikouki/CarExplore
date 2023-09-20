@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_09_19_093800) do
+ActiveRecord::Schema.define(version: 2023_09_20_085205) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(version: 2023_09_19_093800) do
     t.datetime "remember_created_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "username"
     t.index ["email"], name: "index_admins_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
@@ -70,8 +71,8 @@ ActiveRecord::Schema.define(version: 2023_09_19_093800) do
   create_table "notifications", force: :cascade do |t|
     t.integer "visitor_id", null: false
     t.integer "visited_id", null: false
-    t.integer "post_id", null: false
-    t.integer "comment_id", null: false
+    t.integer "post_id"
+    t.integer "comment_id"
     t.string "action"
     t.boolean "checked"
     t.datetime "created_at", precision: 6, null: false
@@ -144,8 +145,8 @@ ActiveRecord::Schema.define(version: 2023_09_19_093800) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "notifications", "comments"
   add_foreign_key "notifications", "posts"
-  add_foreign_key "notifications", "visiteds"
-  add_foreign_key "notifications", "visitors"
+  add_foreign_key "notifications", "users", column: "visited_id"
+  add_foreign_key "notifications", "users", column: "visitor_id"
   add_foreign_key "reposts", "posts"
   add_foreign_key "reposts", "users"
   add_foreign_key "tag_maps", "posts"

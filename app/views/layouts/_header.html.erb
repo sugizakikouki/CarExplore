@@ -9,28 +9,13 @@
         <ul class="navbar-nav">
         <% if admin_signed_in? %>
           <li>
-            <%= link_to admin_items_path,class: 'nav-link text-light' do %>
-              <i class=""></i> 商品一覧
-            <% end %>
-          </li>
-          <li>
-            <%=  link_to admin_customers_path,class: 'nav-link text-light' do %>
-              <i class=""></i> 会員一覧
-            <% end %>
-          </li>
-          <li>
-            <%=  link_to admin_root_path ,class: 'nav-link text-light' do %>
-              <i class=""></i> 注文履歴一覧
-            <% end %>
-          </li>
-          <li>
-            <%= link_to admin_genres_path, class: 'nav-link text-light' do %>
-              <i class=""></i> ジャンル一覧
+            <%= link_to admins_admins_path,class: 'nav-link text-light' do %>
+              <i class=""></i> index
             <% end %>
           </li>
           <li>
             <%= link_to destroy_admin_session_path, method: :delete,class: 'nav-link text-light' do %>
-              <i class=""></i> ログアウト
+              <i class=""></i> Log out
             <% end %>
           </li>
           <% elsif user_signed_in? %>
@@ -42,6 +27,11 @@
           <li>
             <%= link_to posts_path, class: 'nav-link' do %>
               <i class=""></i> Post
+            <% end %>
+          </li>
+          <li>
+            <%= link_to notifications_path, class: 'nav-link' do %>
+              <i class=""></i> 通知
             <% end %>
           </li>
           <li>

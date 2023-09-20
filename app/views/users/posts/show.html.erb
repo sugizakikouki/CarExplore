@@ -28,7 +28,7 @@
                         <% if @post.images.attached? %>
                             <% @post.images.each do |image| %>
                                 <div class="image-container" style="margin-right: 10px; margin-bottom: 10px;">
-                                    <%= image_tag image.variant(resize_to_limit: [1000, 1000]).processed, class: 'img-fluid', style: 'max-width: 100px; max-height: 100px;' %>
+                                    <%= image_tag image, class: 'img-fluid', style: 'max-width: 100px; max-height: 100px;' %>
                                 </div>
                             <% end %>
                         <% end %>

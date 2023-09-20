@@ -45,6 +45,7 @@ Rails.application.routes.draw do
     end
     
     namespace :admins do
+        root to: 'admins/admins#index'
         resources :admins, only: [:index, :show, :destroy]
     end
 

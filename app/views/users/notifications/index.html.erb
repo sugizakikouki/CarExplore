@@ -1,0 +1,10 @@
+<div class="text-light">
+    <%= link_to "通知削除", notification_path(@notifications), method: :delete ,class: "fas fa-trash" %>
+    <% if @notifications.present? %>
+        <div class="users-index">
+            <%= render @notifications %>
+        </div>
+    <% else %>
+        <p>通知はありません</p>
+    <% end %>
+</div>
