@@ -11,6 +11,11 @@ Rails.application.routes.draw do
       registrations: 'users/registrations'
     }
     
+    devise_scope :user do
+        get '/users/guest_sign_in', to: 'users/sessions#guest_sign_in'
+        post '/users/guest_sign_in', to: 'users/sessions#guest_sign_in'
+    end
+    
     root 'homes#top'
     
     scope module: :users do
@@ -39,10 +44,6 @@ Rails.application.routes.draw do
         resources :notifications, only: [:index, :destroy]
     end
 
-    devise_scope :user do
-        get '/users/guest_sign_in', to: 'users/sessions#guest_sign_in'
-        post '/users/guest_sign_in', to: 'users/sessions#guest_sign_in'
-    end
     
     namespace :admins do
         root to: 'admins/admins#index'
