@@ -1,2 +1,2 @@
-class TagsController < ApplicationController
+class Users::TagsController < ApplicationController
 end

@@ -1,4 +1,4 @@
-class RepostsController < ApplicationController
+class Users::RepostsController < ApplicationController
     before_action :set_post
 
     def create  # リポストボタンを押下すると、押したユーザと押した投稿のIDよりrepostsテーブルに登録する

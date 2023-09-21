@@ -1,2 +1,2 @@
-class FollowsController < ApplicationController
+class Users::FollowsController < ApplicationController
 end
