@@ -11,7 +11,7 @@ Rails.application.routes.draw do
       registrations: 'users/registrations'
     }
     
-    root to: 'homes#top'
+    root 'homes#top'
     
     scope module: :users do
         

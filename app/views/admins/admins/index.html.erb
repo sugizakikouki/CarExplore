@@ -1,0 +1,28 @@
+<div class="container">
+    <div class="row text-light">
+        <h2>Users List</h2>
+        <div class="col-md-6">
+            <table class="table text-light">
+                <tr>
+                  <th class='col'>name</th>
+                  <th class='col'>username</th>
+                  <th class='col'>follows</th>
+                  <th class='col'>followed</th>
+                  <th class='col'>profile</th>
+                </tr>
+                <% @users.each do |user| %>
+                <tr>
+                    <td>
+                        <%= image_tag user.image_url(:icon),:class=>'user_icon' %><br>
+                        <%= link_to user.name, admins_admin_path(user.id) %>
+                    </td>
+                    <td><%= user.username %></td>
+                    <td><%= user.followers.count %></td>
+                    <td><%= user.followeds.count %></td>
+                    <td><%= user.profile %></td>
+                </tr>
+                <% end %>
+            </table>
+        </div>
+    </div>
+</div>
