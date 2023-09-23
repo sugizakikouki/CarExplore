@@ -11,16 +11,27 @@
                   <th class='col'>profile</th>
                 </tr>
                 <% @users.each do |user| %>
-                <tr>
-                    <td>
-                        <%= image_tag user.image_url(:icon),:class=>'user_icon' %><br>
-                        <%= link_to user.name, admins_admin_path(user.id) %>
-                    </td>
-                    <td><%= user.username %></td>
-                    <td><%= user.followers.count %></td>
-                    <td><%= user.followeds.count %></td>
-                    <td><%= user.profile %></td>
-                </tr>
+                    <tr>
+                        <td>
+                            <%= image_tag user.image_url(:icon),:class=>'user_icon' %><br>
+                            <%= link_to user.name, admins_admin_path(user.id) %>
+                        </td>
+                        <td><%= user.username %></td>
+                        <td><%= user.followers.count %></td>
+                        <td><%= user.followeds.count %></td>
+                        <td><%= user.profile %></td>
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn-n btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    Menu
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                    <a class="dropdown-item" href="#"><%= link_to 'Show', admins_admin_path(user.id) %></a>
+                                    <a class="dropdown-item" href="#"><%= link_to 'Delete', admins_admin_path(user.id), method: :delete, data: { confirm: 'Are you sure?' } %></a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
                 <% end %>
             </table>
         </div>

@@ -190,7 +190,6 @@ img {
 .header:before {
   border: 2px solid rgba(161, 220, 255, 0.34);
   border-radius: 100%;
-  content: "";
   height: 140px;
   left: 0;
   margin: 67px auto;
@@ -261,4 +260,8 @@ img {
 
 .user_icon{
   width: 50px;
+}
+
+.card{
+  background-color: #87cefa;
 }

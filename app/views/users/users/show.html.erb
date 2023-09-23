@@ -3,39 +3,64 @@
     <%= flash[:success] %>
   </div>
 <% end %>
-<div class="window">
-  <div class="overlay"></div>
-  <div class="box header">
-    <%= image_tag @user.image_url %>
-    <h2><%= @user.name %></h2>
-    <h4><%= @user.profile %></h4>
-    <ul>
-      <li><a href=""><span class="ion-ios-camera-outline"></span><%= @user.posts.count %></a></li>
-      <li><a href=""><span class="ion-ios-heart-outline"></span><%= @user.followers.count %></a></li>
-      <li><a href=""><span class="ion-ios-person-outline"></span><%= @user.followeds.count %></a></li>
-    </ul>
-  </div>
-  <div class="box footer">
-    <% if current_user != @user %>
-      <% if current_user.following?(@user) %>
-        <%= link_to "unfollow", user_relationships_path(@user.id), method: :delete, class: "btn btn-danger" %>
-      <% else %>
-        <%= link_to "follow", user_relationships_path(@user.id), method: :post, class: "btn btn-success" %>
-      <% end %>
-    <% end %>
-    <div class="dropdown">
-      <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <i class="fa-solid fa-toolbox" style="color: #000000;"></i>
-      </a>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-        <a class="dropdown-item" href="#">
-          <%= link_to "Edit", edit_user_path %>
-        </a>
-        <a class="dropdown-item" href="#">Another action</a>
-        <a class="dropdown-item" href="#">Something else here</a>
+<div class="container">
+  <div class="row">
+    <div class="col-md-5">
+      <div class="window">
+        <div class="overlay"></div>
+        <div class="box header">
+          <%= image_tag @user.image_url %>
+          <h2><%= @user.name %></h2>
+          <h4><%= @user.profile %></h4>
+          <ul>
+            <li><a href=""><span class="ion-ios-camera-outline"></span><%= @user.posts.count %></a></li>
+            <li><a href=""><span class="ion-ios-heart-outline"></span><%= @user.followers.count %></a></li>
+            <li><a href=""><span class="ion-ios-person-outline"></span><%= @user.followeds.count %></a></li>
+          </ul>
+        </div>
+        <div class="box footer">
+          <% if current_user != @user %>
+            <% if current_user.following?(@user) %>
+              <%= link_to "unfollow", user_relationships_path(@user.id), method: :delete, class: "btn btn-danger" %>
+            <% else %>
+              <%= link_to "follow", user_relationships_path(@user.id), method: :post, class: "btn btn-success" %>
+            <% end %>
+          <% end %>
+          <div class="dropdown">
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fa-solid fa-toolbox" style="color: #000000;"></i>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <a class="dropdown-item" href="#">
+                <%= link_to "Edit", edit_user_path %>
+              </a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-5 offset-md-2">
+      <div class="flex">
+        <% if @post_all.any? %>
+          <% @post_all.each do |post| %>
+            <div class="card">
+              <div class="content">
+                <p><%= post.content %></p>
+                <% if post.images.attached? %>
+                  <div class="image-container">
+                    <%= image_tag post.images.first, class: 'img-fluid', style: 'max-width: 100px; max-height: 100px;' %>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        <% else %>
+          <p>No posts found.</p>
+        <% end %>
       </div>
     </div>
   </div>
 </div>
-
 

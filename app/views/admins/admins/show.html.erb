@@ -1,26 +1,31 @@
-<div class="window">
-  <div class="overlay"></div>
-  <div class="box header">
-    <%= image_tag @user.image_url %>
-    <h2><%= @user.name %></h2>
-    <h4><%= @user.profile %></h4>
-    <ul>
-      <li><a href=""><span class="ion-ios-camera-outline"></span><%= @user.posts.count %></a></li>
-      <li><a href=""><span class="ion-ios-heart-outline"></span><%= @user.followers.count %></a></li>
-      <li><a href=""><span class="ion-ios-person-outline"></span><%= @user.followeds.count %></a></li>
-    </ul>
-  </div>
-  <div class="box footer">
-    <div class="dropdown">
-      <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-        <i class="fa-solid fa-toolbox" style="color: #000000;"></i>
-      </a>
-      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-        <a class="dropdown-item" href="#">aaa</a>
-        <a class="dropdown-item" href="#">Another action</a>
-        <a class="dropdown-item" href="#">Something else here</a>
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="window">
+        <div class="overlay"></div>
+        <div class="box header">
+          <%= image_tag @user.image_url %>
+          <h2><%= @user.name %></h2>
+          <h4><%= @user.profile %></h4>
+          <ul>
+            <li><a href=""><span class="ion-ios-camera-outline"></span><%= @user.posts.count %></a></li>
+            <li><a href=""><span class="ion-ios-heart-outline"></span><%= @user.followers.count %></a></li>
+            <li><a href=""><span class="ion-ios-person-outline"></span><%= @user.followeds.count %></a></li>
+          </ul>
+        </div>
+        <div class="box footer">
+          <div class="dropdown">
+            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="fa-solid fa-toolbox" style="color: #000000;"></i>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+              <a class="dropdown-item" href="#"><%= link_to 'Delete', admins_admin_path(@user.id), method: :delete, data: { confirm: 'Are you sure?' } %></a>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
+    <div class="col-md-4 offset-md-3"></div>
   </div>
 </div>
 

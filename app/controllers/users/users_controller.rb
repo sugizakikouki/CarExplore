@@ -9,6 +9,8 @@ class Users::UsersController < ApplicationController
     @following_users = @user.following_users
     @follower_users = @user.follower_users
     @posts = @user.posts_with_reposts.page(params[:page])
+    @post_all = @user.posts
+    @post = Post.find(params[:id])
   end
 
   def edit
