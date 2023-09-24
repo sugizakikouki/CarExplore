@@ -1,10 +1,22 @@
-<div class="container" id="container">
-    <div class="row">
-        <div class="col-md-3">
-            <div><%= link_to "Guest", users_guest_sign_in_path, class: 'btn btn-primary' %></div>
-        </div>
-        <div class="col-md-3">
-            <div><%= link_to "Sing Up", new_user_registration_path, class: 'btn btn-primary' %></div>
-        </div>
+<div class="container">
+    <div class="card">
+        <h2>Guest</h2>
+        <i class="fas fa-arrow-right"></i>
+        <p>welcome to.</p>
+        <div class="pic"></div>
+        <button>
+            <a href="<%= users_guest_sign_in_path %>" class="btn1"></a>
+        </button>
+    </div>
+        <div class="card card2">
+        <h2>Sing Up</h2>
+        <i class="fas fa-arrow-right"></i>
+        <p>welcome to.</p>
+        <div class="pic"></div>
+        <button>
+            <a href="<%= new_user_registration_path %>" class="btn1"></a>
+        </button>
     </div>
 </div>
+
+

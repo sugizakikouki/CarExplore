@@ -1,58 +1,56 @@
 <header>
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <div class="container">
-      <a class="navbar-brand" href="#">CarExplore</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-        <% if admin_signed_in? %>
-          <li>
-            <%= link_to admins_admins_path,class: 'nav-link text-light' do %>
-              <i class=""></i> User List
-            <% end %>
-          </li>
-          <li>
-            <%= link_to destroy_admin_session_path, method: :delete,class: 'nav-link text-light' do %>
-              <i class=""></i> Log out
-            <% end %>
-          </li>
-          <% elsif user_signed_in? %>
-          <li>
-            <%= link_to user_path(current_user), class: 'nav-link' do %>
-              <i class=""></i> My Page
-            <% end %>
-          </li>
-          <li>
-            <%= link_to posts_path, class: 'nav-link' do %>
-              <i class=""></i> Post
-            <% end %>
-          </li>
-          <li>
-            <%= link_to notifications_path, class: 'nav-link' do %>
-              <i class=""></i> Notice
-            <% end %>
-          </li>
-          <li>
-            <%= link_to destroy_user_session_path, method: :delete,class: 'nav-link' do %>
-              <i class=""></i> Log Out
-            <% end %>
-          </li>
-        <% else %>
-          <li>
-            <%= link_to new_user_registration_path,class: 'nav-link text-light' do %>
-              <i class=""></i> Sign Up
-            <% end %>
-          </li>
-          <li>
-            <%= link_to user_session_path ,class: 'nav-link text-light' do %>
-              <i class=""></i> Log In
-            <% end %>
-          </li>
-        <% end %>
-        </ul>
-      </div>
+    <a class="navbar-brand" href="/">CarExplore</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav">
+      <% if admin_signed_in? %>
+        <li>
+          <%= link_to admins_admins_path,class: 'nav-link text-light' do %>
+            <i class=""></i> User List
+          <% end %>
+        </li>
+        <li>
+          <%= link_to destroy_admin_session_path, method: :delete,class: 'nav-link text-light' do %>
+            <i class=""></i> Log out
+          <% end %>
+        </li>
+        <% elsif user_signed_in? %>
+        <li>
+          <%= link_to user_path(current_user), class: 'nav-link' do %>
+            <i class=""></i> My Page
+          <% end %>
+        </li>
+        <li>
+          <%= link_to posts_path, class: 'nav-link' do %>
+            <i class=""></i> Post
+          <% end %>
+        </li>
+        <li>
+          <%= link_to notifications_path, class: 'nav-link' do %>
+            <i class=""></i> Notice
+          <% end %>
+        </li>
+        <li>
+          <%= link_to destroy_user_session_path, method: :delete,class: 'nav-link' do %>
+            <i class=""></i> Log Out
+          <% end %>
+        </li>
+      <% else %>
+        <li>
+          <%= link_to new_user_registration_path,class: 'nav-link text-light' do %>
+            <i class=""></i> Sign Up
+          <% end %>
+        </li>
+        <li>
+          <%= link_to user_session_path ,class: 'nav-link text-light' do %>
+            <i class=""></i> Log In
+          <% end %>
+        </li>
+      <% end %>
+      </ul>
     </div>
   </nav>
 </header>

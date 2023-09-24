@@ -3,7 +3,7 @@
     <%= flash[:success] %>
   </div>
 <% end %>
-<div class="container">
+<div class="container1">
   <div class="row">
     <div class="col-md-5">
       <div class="window">
@@ -41,23 +41,31 @@
         </div>
       </div>
     </div>
-    <div class="col-md-5 offset-md-2">
+    <div class="col-md-5 offset-1">
       <div class="flex">
         <% if @post_all.any? %>
           <% @post_all.each do |post| %>
-            <div class="card">
+            <div class="card mt-4">
+              <div class="plf">
+                <div><%= image_tag post.user.image_url(:icon),:class=>'user_icon' %></div>
+                <div><%= @user.name %></div>
+                <div><%= @user.username %></div>
+              </div>
+              
               <div class="content">
-                <p><%= post.content %></p>
+                <div><%= post.content %></div>
                 <% if post.images.attached? %>
                   <div class="image-container">
-                    <%= image_tag post.images.first, class: 'img-fluid', style: 'max-width: 100px; max-height: 100px;' %>
+                    <% post.images.each do |image| %>
+                      <%= image_tag image, class: 'img-fluid', style: 'max-width: 150px; max-height: 150px;' %>
+                    <% end %>
                   </div>
                 <% end %>
               </div>
             </div>
           <% end %>
         <% else %>
-          <p>No posts found.</p>
+          <div>No posts found.</div>
         <% end %>
       </div>
     </div>
