@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row d-flex justify-content-between mt-5">
-        <div class="col-md-6 text-light">
+        <div class="col-lg-9 text-light">
             <table class="table text-light">
                 <tr>
                     <th scope="col">name</th>
@@ -56,7 +56,7 @@
                 <%= render partial: "users/comments/comment", locals: { post:@post } %>
             </div>
         </div>
-        <div class="col-md-4 offset-md-2 text-light">
+        <div class="col-lg-3 text-light">
             <div>
                 <%= form_with model: [@post, @comment], local: false do |f| %>
                     <div class="mt-3">

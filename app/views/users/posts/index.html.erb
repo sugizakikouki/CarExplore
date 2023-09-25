@@ -1,62 +1,36 @@
-<div class="container">
+<div class="search">
     <%= render "search", post: @post %>
-    <div class="row d-flex justify-content-between mt-5">
-        <div class="col-md-6 text-light">
-            <table class="table text-light">
-                <tr>
-                    <th scope="col">name</th>
-                    <th scope="col">username</th>
-                    <th scope="col">content</th>
-                    <th scope="col">image</th>
-                    <th scope="col">comments</th>
-                    <th scope="col">favorites</th>
-                    <th></th>
-                </tr>
+</div>
+<div class="container1">
+  <div class="row">
+    <div class="col-md-8">
+        <div class="flex">
+            <% if @posts.any? %>
                 <% @posts.each do |post| %>
-                <tr>
-                    <td>
-                        <%= image_tag post.user.image_url(:icon),:class=>'user_icon' %><br>
-                        <%= link_to post.user.name, user_path(post.user) %>
-                    </td>
-                    <td><%= post.user.username %></td>
-                    <td>
-                        <%= post.content %><br>
-                        <p></p>
-                        <% post.tags.each do |tag| %>
-                            <%= tag.tag_name %>
-                        <% end %>
-                    </td>
-                    <td>
+                    <div class="card mt-4">
+                        <div class="plf">
+                            <div><%= image_tag post.user.image_url %></div>
+                            <div class="name"><%= post.user.name %></div>
+                            <div class="name"><%= post.user.username %></div>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div><%= post.content %></div>
                         <% if post.images.attached? %>
-                            <% post.images.each do |image| %>
-                                <div class="image-container" style="margin-right: 10px; margin-bottom: 10px;">
-                                    <%= image_tag image, class: 'img-fluid', style: 'max-width: 100px; max-height: 100px;' %>
-                                </div>
-                            <% end %>
-                        <% end %>
-                    </td>
-                    <td><%= post.comments.count %></td>
-                    <td><%= post.favorites.count %></td>
-                    <td>
-                        <div class="dropdown">
-                            <button class="btn-n btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Menu
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#"><%= link_to 'Show', post_path(post) %></a>
-                                <a class="dropdown-item" href="#"><%= link_to 'repost', reposts_path(repost_id: post.id) %></a>
-                                <% if post.user == current_user %>
-                                    <a class="dropdown-item" href="#"><%= link_to 'Delete', post_path(post), method: :delete, data: { confirm: 'Are you sure?' } %></a>
+                            <div class="image-container">
+                                <% post.images.each do |image| %>
+                                    <%= image_tag image, class: 'img-fluid' %>
                                 <% end %>
                             </div>
-                        </div>
-                    </td>
-                </tr>
+                        <% end %>
+                    </div>
+                </div>
                 <% end %>
-                <%= paginate @posts %>
-            </table>
+            <% else %>
+                <div>No posts found.</div>
+            <% end %>
         </div>
-        <div class="col-md-3 offset-md-3 text-light">
+        <div class="col-md-4 text-light">
             <%= form_with model: @post do |f| %>
                 <div class="mt-3">
                     <h4>Post</h4>

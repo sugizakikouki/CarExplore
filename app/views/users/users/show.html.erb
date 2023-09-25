@@ -5,7 +5,7 @@
 <% end %>
 <div class="container1">
   <div class="row">
-    <div class="col-md-5">
+    <div class="col-md-6">
       <div class="window">
         <div class="overlay"></div>
         <div class="box header">
@@ -41,15 +41,15 @@
         </div>
       </div>
     </div>
-    <div class="col-md-5 offset-1">
+    <div class="col-md-6">
       <div class="flex">
         <% if @post_all.any? %>
           <% @post_all.each do |post| %>
             <div class="card mt-4">
               <div class="plf">
-                <div><%= image_tag post.user.image_url(:icon),:class=>'user_icon' %></div>
-                <div><%= @user.name %></div>
-                <div><%= @user.username %></div>
+                <div><%= image_tag post.user.image_url %></div>
+                <div class="name"><%= @user.name %></div>
+                <div class="name"><%= @user.username %></div>
               </div>
               
               <div class="content">
@@ -57,7 +57,7 @@
                 <% if post.images.attached? %>
                   <div class="image-container">
                     <% post.images.each do |image| %>
-                      <%= image_tag image, class: 'img-fluid', style: 'max-width: 150px; max-height: 150px;' %>
+                      <%= image_tag image, class: 'img-fluid' %>
                     <% end %>
                   </div>
                 <% end %>

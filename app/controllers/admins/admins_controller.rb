@@ -14,6 +14,9 @@ class Admins::AdminsController < ApplicationController
         @posts = @user.posts_with_reposts.page(params[:page])
     end
     
-    def about
+    def destroy
+        User.find(params[:id]).destroy
+        flash[:success] = "User deleted"
+        redirect_to admins_admins_path
     end
 end
