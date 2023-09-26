@@ -1,3 +1,4 @@
+<% @post = @post ? @post : post %>
 <div class="favorites_buttons">
     <% if @post.favorited_by?(current_user) %>
         <p>

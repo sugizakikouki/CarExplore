@@ -1,75 +1,58 @@
-<div class="container">
-    <div class="row d-flex justify-content-between mt-5">
-        <div class="col-lg-9 text-light">
-            <table class="table text-light">
-                <tr>
-                    <th scope="col">name</th>
-                    <th scope="col">username</th>
-                    <th scope="col">content</th>
-                    <th scope="col">image</th>
-                    <th scope="col">comments</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-                <tr>
-                    <td>
-                        <%= image_tag @post.user.image_url(:icon), style: 'max-width: 50px; max-height: 50px; margin-right: 10px;' %>
-                        <%= @post.user.name %>
-                    </td>
-                    <td><%= @post.user.username %></td>
-                    <td>
-                        <%= @post.content %><br>
-                        <p></p>
-                        <% @post.tags.each do |tag| %>
-                            <%= tag.tag_name %>
+<div class="container1">
+  <div class="row">
+    <div class="col-md-8">
+        <div class="flex mx-auto">
+            <div class="card mt-4 mx-3">
+                <div class="plf">
+                    <div><%= image_tag @post.user.image_url %></div>
+                    <div class="name"><%= @post.user.name %></div>
+                    <div class="name"><%= @post.user.username %></div>
+                    <div class="font">
+                        <i class="fa-regular fa-comments"></i>
+                        <%= @post.comments.count %>
+                        <div id="favorites"><%= render partial: "users/favorites/favorite", locals: { post:@post } %></div>
+                        <%= link_to posts_path, method: :get do %>
+                            <i class="fa-solid fa-delete-left"></i>
                         <% end %>
-                    </td>
-                    <td>
-                        <% if @post.images.attached? %>
-                            <% @post.images.each do |image| %>
-                                <div class="image-container" style="margin-right: 10px; margin-bottom: 10px;">
-                                    <%= image_tag image, class: 'img-fluid', style: 'max-width: 100px; max-height: 100px;' %>
-                                </div>
+                        <%= link_to reposts_path(repost_id: @post.id), method: :get do %>
+                            <i class="fa-solid fa-retweet"></i>
+                        <% end %>
+                        <% if @post.user == current_user %>
+                            <%= link_to post_path(@post), method: :delete do %>
+                                <i class="fa-solid fa-trash-can"></i>
                             <% end %>
                         <% end %>
-                    </td>
-                    <td>
-                        <%= @post.comments.count %>
-                    </td>
-                    <td id="favorites"><%= render partial: "users/favorites/favorite", locals: { post:@post } %></td>
-                    <td>
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Menu
-                            </button>
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="#"><%= link_to "Back", posts_path %></a>
-                                <% if @post.user == current_user %>
-                                    <a class="dropdown-item" href="#"><%= link_to 'Delete', post_path(@post), method: :delete, data: { confirm: 'Are you sure?' } %></a>
-                                <% end %>
-                            </div>
+                    </div>
+                </div>
+                <div class="content">
+                    <div><%= @post.content %></div>
+                    <% if @post.images.attached? %>
+                        <div class="image-container">
+                            <% @post.images.each do |image| %>
+                                <%= image_tag image, class: 'img-fluid' %>
+                            <% end %>
                         </div>
-                    </td>
-                </tr>
-            </table>
-            <div id="comment">
+                    <% end %>
+                </div>
+            </div>
+            <div id="comment" class="text-light">
                 <%= render partial: "users/comments/comment", locals: { post:@post } %>
             </div>
         </div>
-        <div class="col-lg-3 text-light">
-            <div>
-                <%= form_with model: [@post, @comment], local: false do |f| %>
-                    <div class="mt-3">
-                        <h4>Reply</h4>
-                        <%= f.text_area :comment, rows: '5' %>
-                    </div>
-                    <div class="mt-3">
-                        <h5>Image</h5>
-                        <%= f.file_field :images, multiple: true, accept: "image/*" %>
-                    </div>
-                    <button type="submit" class="btn-s btn-sm mt-3" style="width: 80px;">Reply</button>
-                <% end %>
-            </div>
+    </div>
+    <div class="col-lg-3 text-light">
+        <div>
+            <%= form_with model: [@post, @comment], local: false do |f| %>
+                <div class="mt-3">
+                    <h4>Reply</h4>
+                    <%= f.text_area :comment, rows: '5' %>
+                </div>
+                <div class="mt-3">
+                    <h5>Image</h5>
+                    <%= f.file_field :images, multiple: true, accept: "image/*" %>
+                </div>
+                <button type="submit" class="btn-s btn-sm mt-3" style="width: 80px;">Reply</button>
+            <% end %>
         </div>
     </div>
 </div>

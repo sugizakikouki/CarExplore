@@ -1,20 +1,29 @@
 <% @post.comments.each do |comment| %>
-    <div class="mb-3">
-        <div style="display: flex; align-items: center;">
-            <%= image_tag comment.user.image_url(:icon), style: 'max-width: 50px; max-height: 50px; margin-right: 10px;' %>
-            <p><strong><%= comment.user.name %></strong></p>
-            <p><%= comment.created_at.strftime('%Y/%m/%d') %></p>
-        </div>
-        <%= comment.comment %>
-        <% if comment.images.attached? %>
-            <div class="image-container">
-                <% comment.images.each do |image| %>
-                    <%= image_tag image, class: 'img-fluid', style: 'max-width: 100px; max-height: 100px; margin-right: 10px;' %>
+    <div class="flex">
+        <div class="card mt-4 mx-3">
+            <div class="plf">
+                <div><%= image_tag comment.user.image_url %></div>
+                <div class="name"><%= comment.user.name %></div>
+                <div class="name"><%= comment.user.username %></div>
+                <div class="name"><%= comment.created_at.strftime('%Y/%m/%d') %></div>
+                <div class="font">
+                    <% if comment.user == current_user %>
+                        <%= link_to post_comment_path(comment.post, comment), method: :delete, remote: true do %>
+                            <i class="fa-solid fa-trash-can"></i>
+                        <% end %>
+                    <% end %>
+                </div>
+            </div>
+            <div class="content">
+                <div><%= comment.comment %></div>
+                <% if comment.images.attached? %>
+                    <div class="image-container">
+                        <% comment.images.each do |image| %>
+                            <%= image_tag image, class: 'img-fluid', style: 'max-width: 100px; max-height: 100px; margin-right: 10px;' %>
+                        <% end %>
+                    </div>
                 <% end %>
             </div>
-        <% end %>
-        <% if comment.user == current_user %>
-            <%= link_to "削除", post_comment_path(comment.post, comment), method: :delete, remote: true, class: "btn-c" %>
-        <% end %>
+        </div>
     </div>
 <% end %>

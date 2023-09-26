@@ -1,6 +1,6 @@
 class Users::PostsController < ApplicationController
   def index
-    @post = Post.new
+    # @post = Post.new
     @keyword = params[:keyword]
   
     # タグに関連する投稿を取得するか、すべての投稿を取得するかを決定

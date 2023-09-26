@@ -13,9 +13,9 @@
           <h2><%= @user.name %></h2>
           <h4><%= @user.profile %></h4>
           <ul>
-            <li><a href=""><span class="ion-ios-camera-outline"></span><%= @user.posts.count %></a></li>
-            <li><a href=""><span class="ion-ios-heart-outline"></span><%= @user.followers.count %></a></li>
-            <li><a href=""><span class="ion-ios-person-outline"></span><%= @user.followeds.count %></a></li>
+            <li><%= @user.posts.count %>post</li>
+            <li><%= @user.followers.count %>follwer</li>
+            <li><%= @user.followeds.count %>follow</li>
           </ul>
         </div>
         <div class="box footer">
@@ -26,22 +26,12 @@
               <%= link_to "follow", user_relationships_path(@user.id), method: :post, class: "btn btn-success" %>
             <% end %>
           <% end %>
-          <div class="dropdown">
-            <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              <i class="fa-solid fa-toolbox" style="color: #000000;"></i>
-            </a>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-              <a class="dropdown-item" href="#">
-                <%= link_to "Edit", edit_user_path %>
-              </a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
-          </div>
+          <div class="btn"><%= link_to "Edit", edit_user_path %></div>
         </div>
       </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6 text-light">
+      <%= paginate @post_all %>
       <div class="flex">
         <% if @post_all.any? %>
           <% @post_all.each do |post| %>
@@ -50,14 +40,27 @@
                 <div><%= image_tag post.user.image_url %></div>
                 <div class="name"><%= @user.name %></div>
                 <div class="name"><%= @user.username %></div>
+                <div class="font">
+                  <i class="fa-regular fa-comments"></i>
+                  <%= post.comments.count %>
+                  <%= link_to post_path(post), method: :get do %>
+                    <i class="fa-solid fa-check"></i>
+                  <% end %>
+                  <%= link_to reposts_path(repost_id: post.id), method: :get do %>
+                    <i class="fa-solid fa-retweet"></i>
+                  <% end %>
+                  <%= link_to post_path(post), method: :delete do %>
+                    <i class="fa-solid fa-trash-can"></i>
+                  <% end %>
+                </div>
               </div>
               
-              <div class="content">
+              <div class="content text-dark">
                 <div><%= post.content %></div>
                 <% if post.images.attached? %>
                   <div class="image-container">
                     <% post.images.each do |image| %>
-                      <%= image_tag image, class: 'img-fluid' %>
+                      <%= image_tag image, class: 'img-fluid' , loading: 'lazy' %>
                     <% end %>
                   </div>
                 <% end %>
