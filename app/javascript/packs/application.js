@@ -15,7 +15,6 @@ import "../stylesheets/application";
 
 import '@fortawesome/fontawesome-free/js/all';
 import "../stylesheets/application.scss";
-import "../stylesheets/top.scss.erb";
 
 Rails.start()
 Turbolinks.start()
