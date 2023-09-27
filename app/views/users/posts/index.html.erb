@@ -35,6 +35,9 @@
                         </div>
                         <div class="content text-dark">
                             <div><%= post.content %></div>
+                            <% post.tags.each do |tag| %>
+                                <%= tag.tag_name %>
+                            <% end %>
                             <% if post.images.attached? %>
                                 <div class="image-container">
                                     <% post.images.each do |image| %>

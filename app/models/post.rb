@@ -28,6 +28,8 @@ class Post < ApplicationRecord
             tags << new_post_tag
         end
     end
+        
+
     
     def self.search(keyword)
         Post.joins(:user, :tags)
