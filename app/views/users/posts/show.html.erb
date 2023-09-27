@@ -4,9 +4,12 @@
         <div class="flex mx-auto">
             <div class="card mt-4 mx-3">
                 <div class="plf">
-                    <div><%= image_tag @post.user.image_url %></div>
-                    <div class="name"><%= @post.user.name %></div>
-                    <div class="name"><%= @post.user.username %></div>
+                    <%= link_to user_path(@post.user.id) do %>
+                        <span><%= image_tag @post.user.image_url %></span>
+                        <span class="name"><%= @post.user.name %></span>
+                        <span class="name"><%= @post.user.username %></span>
+                        <span class="name"><%= @post.created_at.strftime('%Y/%m/%d') %></span>
+                    <% end %>
                     <div class="font">
                         <i class="fa-regular fa-comments"></i>
                         <%= @post.comments.count %>
@@ -51,6 +54,7 @@
                     <h5>Image</h5>
                     <%= f.file_field :images, multiple: true, accept: "image/*" %>
                 </div>
+                
                 <button type="submit" class="btn-s btn-sm mt-3" style="width: 80px;">Reply</button>
             <% end %>
         </div>

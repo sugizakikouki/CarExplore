@@ -20,6 +20,11 @@ class User < ApplicationRecord
   has_many :active_notifications, class_name: "Notification", foreign_key:"visitor_id", dependent: :destroy
   has_many :passive_notifications, class_name: "Notification", foreign_key:"visited_id", dependent: :destroy
   
+  validates :name, presence: true, uniqueness: true, length: {minimum: 1, maximum: 10}
+  validates :username, presence: true, uniqueness: true, length: {minimum: 1, maximum: 10}, format: { with: /\A@.+/, message: "は@から始めてください" }
+  validates :email, uniqueness: true, presence: true
+  
+  
   paginates_per 10
 
          

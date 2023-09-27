@@ -37,9 +37,12 @@
           <% @post_all.each do |post| %>
             <div class="card mt-4">
               <div class="plf">
-                <div><%= image_tag post.user.image_url %></div>
-                <div class="name"><%= @user.name %></div>
-                <div class="name"><%= @user.username %></div>
+                <%= link_to user_path(post.user.id) do %>
+                  <span><%= image_tag post.user.image_url %></span>
+                  <span class="name"><%= @user.name %></span>
+                  <span class="name"><%= @user.username %></span>
+                  <span class="name"><%= post.created_at.strftime('%Y/%m/%d') %></span>
+                <% end %>
                 <div class="font">
                   <i class="fa-regular fa-comments"></i>
                   <%= post.comments.count %>

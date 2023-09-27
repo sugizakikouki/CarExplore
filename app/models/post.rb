@@ -6,6 +6,8 @@ class Post < ApplicationRecord
     has_many :tag_maps, dependent: :destroy
     has_many :tags, through: :tag_maps
     has_many :notifications, dependent: :destroy
+    
+    validates :content, presence: true, length: {minimum: 1, maximum: 150}
 
     
     def favorited_by?(user)
