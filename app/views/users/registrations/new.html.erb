@@ -6,6 +6,49 @@
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
         <%= render "users/shared/error_messages", object: resource %>
         
+        <form>
+          <div class="form-group">
+            <label for="exampleInputUsername1">Username</label>
+            <input type="username" class="form-control" id="exampleInputUsername1" aria-describedby="usernameHelp" placeholder="@username">
+            <small id="usernameHelp" class="form-text text-muted"></small>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputName1">Name</label>
+            <input type="name" class="form-control" id="exampleInputName1" aria-describedby="nameHelp" placeholder="name">
+            <small id="nameHelp" class="form-text text-muted"></small>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            <% if @minimum_password_length %>
+              <small id="emailHelp" class="form-text text-muted"><em>(<%= @minimum_password_length %> characters minimum)</em></small>
+            <% end %>
+          </div>
+          <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">Show Password</label>
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Password_Confirmation</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+            <% if @minimum_password_length %>
+              <small id="emailHelp" class="form-text text-muted"><em>(<%= @minimum_password_length %> characters minimum)</em></small>
+            <% end %>
+          </div>
+          <div class="form-group form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">Show Password</label>
+          </div>
+          <button type="submit" class="btn btn-primary">Sign up</button>
+        </form>
+        
+
+        
         <div class="field">
           <%= f.label :username %><br>
           <%= f.text_field :username %>

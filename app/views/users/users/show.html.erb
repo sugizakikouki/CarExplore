@@ -3,6 +3,12 @@
     <%= flash[:success] %>
   </div>
 <% end %>
+<% if flash[:alert] %>
+  <div class="alert alert-danger">
+    <%= flash[:alert] %>
+  </div>
+<% end %>
+
 <div class="container1">
   <div class="row">
     <div class="col-md-6">
@@ -13,11 +19,12 @@
           <h2><%= @user.name %></h2>
           <h4><%= @user.profile %></h4>
           <ul>
-            <li><%= @user.posts.count %>post</li>
-            <li><%= @user.followers.count %>follwer</li>
-            <li><%= @user.followeds.count %>follow</li>
+            <li><%= @user.posts.count %> post</li>
+            <li><%= @user.followers.count %> follower</li>
+            <li><%= @user.followeds.count %> follow</li>
           </ul>
         </div>
+
         <div class="box footer">
           <% if current_user != @user %>
             <% if current_user.following?(@user) %>
@@ -30,18 +37,21 @@
         </div>
       </div>
     </div>
+
     <div class="col-md-6 text-light">
-      <%= paginate @post_all %>
+      <div class="page mt-4">
+        <%= paginate @post_all %>
+      </div>
       <div class="flex">
         <% if @post_all.any? %>
           <% @post_all.each do |post| %>
-            <div class="card mt-4">
+            <div class="card">
               <div class="plf">
                 <%= link_to user_path(post.user.id) do %>
                   <span><%= image_tag post.user.image_url %></span>
                   <span class="name"><%= @user.name %></span>
                   <span class="name"><%= @user.username %></span>
-                  <span class="name"><%= post.created_at.strftime('%Y/%m/%d') %></span>
+                  <span class="name"><%= custom_date_format(post.created_at) %></span>
                 <% end %>
                 <div class="font">
                   <i class="fa-regular fa-comments"></i>
@@ -52,18 +62,22 @@
                   <%= link_to reposts_path(repost_id: post.id), method: :get do %>
                     <i class="fa-solid fa-retweet"></i>
                   <% end %>
-                  <%= link_to post_path(post), method: :delete do %>
-                    <i class="fa-solid fa-trash-can"></i>
+                  <% if post.user == current_user %>
+                    <%= link_to post_path(post), method: :delete do %>
+                      <i class="fa-solid fa-trash-can"></i>
+                    <% end %>
                   <% end %>
                 </div>
               </div>
-              
               <div class="content text-dark">
                 <div><%= post.content %></div>
+                <% post.tags.each do |tag| %>
+                  <%= tag.tag_name %>
+                <% end %>
                 <% if post.images.attached? %>
                   <div class="image-container">
                     <% post.images.each do |image| %>
-                      <%= image_tag image, class: 'img-fluid' , loading: 'lazy' %>
+                      <%= image_tag image, class: 'img-fluid', loading: 'lazy' %>
                     <% end %>
                   </div>
                 <% end %>
@@ -77,4 +91,3 @@
     </div>
   </div>
 </div>
-

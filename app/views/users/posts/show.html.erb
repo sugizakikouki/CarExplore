@@ -8,7 +8,7 @@
                         <span><%= image_tag @post.user.image_url %></span>
                         <span class="name"><%= @post.user.name %></span>
                         <span class="name"><%= @post.user.username %></span>
-                        <span class="name"><%= @post.created_at.strftime('%Y/%m/%d') %></span>
+                        <span class="name"><%= custom_date_format(@post.created_at) %></span>
                     <% end %>
                     <div class="font">
                         <i class="fa-regular fa-comments"></i>
@@ -29,6 +29,9 @@
                 </div>
                 <div class="content">
                     <div><%= @post.content %></div>
+                    <% @post.tags.each do |tag| %>
+                        <%= tag.tag_name %>
+                    <% end %>
                     <% if @post.images.attached? %>
                         <div class="image-container">
                             <% @post.images.each do |image| %>
@@ -38,7 +41,7 @@
                     <% end %>
                 </div>
             </div>
-            <div id="comment" class="text-light">
+            <div id="comment">
                 <%= render partial: "users/comments/comment", locals: { post:@post } %>
             </div>
         </div>

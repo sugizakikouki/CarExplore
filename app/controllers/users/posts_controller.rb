@@ -67,8 +67,13 @@ class Users::PostsController < ApplicationController
   
   def destroy
     post = Post.find(params[:id])
-    post.destroy
-    redirect_to request.referer
+    if current_user == post.user
+      post.destroy
+      redirect_to request.referer
+    else
+      flash[:alert] = "他のユーザーの投稿を削除する権限がありません。"
+      redirect_to request.referer
+    end
   end
   
   private

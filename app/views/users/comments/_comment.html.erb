@@ -2,11 +2,13 @@
     <div class="flex">
         <div class="card mt-4 mx-3">
             <div class="plf">
-                <div><%= image_tag comment.user.image_url %></div>
-                <div class="name"><%= comment.user.name %></div>
-                <div class="name"><%= comment.user.username %></div>
-                <% if comment.created_at.present? %>
-                    <div class="name"><%= comment.created_at.strftime('%Y/%m/%d') %></div>
+                <%= link_to user_path(comment.user.id) do %>
+                    <span><%= image_tag comment.user.image_url %></span>
+                    <span class="name"><%= comment.user.name %></span>
+                    <span class="name"><%= comment.user.username %></span>
+                    <% if comment.created_at.present? %>
+                        <span class="name"><%= custom_date_format(comment.created_at) %></span>
+                    <% end %>
                 <% end %>
                 <div class="font">
                     <% if comment.user == current_user %>
