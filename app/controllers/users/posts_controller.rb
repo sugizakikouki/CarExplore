@@ -44,7 +44,7 @@ class Users::PostsController < ApplicationController
     
     @repost = Post.new
     @repost.content = post.content
-    @repost.user_id = post.user_id
+    @repost.user_id = post.current_user.id
     @repost.repost_id = post.id
     
     post.images.each do |image|
