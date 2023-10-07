@@ -86,3 +86,4 @@ class Users::PostsController < ApplicationController
     params.require(:post).permit(:content, images: [])
   end
 end
+# test
