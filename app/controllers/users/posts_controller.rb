@@ -13,6 +13,10 @@ class Users::PostsController < ApplicationController
   
     # 投稿を最新のものから表示するために、created_at カラムを降順にソート
     @posts = @posts.order(created_at: :desc).page(params[:page])
+    # 各投稿に対するリポスト情報を含める
+    @posts.each do |post|
+      post.reposts = Post.where(repost_id: post.id)
+    end
   end
 
   def show
@@ -44,7 +48,7 @@ class Users::PostsController < ApplicationController
     
     @repost = Post.new
     @repost.content = post.content
-    @repost.user_id = post.current_user.id
+    @repost.user_id = current_user.id
     @repost.repost_id = post.id
     
     post.images.each do |image|

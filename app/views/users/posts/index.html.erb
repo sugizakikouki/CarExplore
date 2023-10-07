@@ -6,14 +6,15 @@
     <div class="col-md-8">
         
         <div class="flex mx-auto text-light">
-            <div class="page2">
-                <%= paginate @posts %>
-            </div>
             <% if flash[:notice] %>
                 <div class="alert alert-notice">
                     <%= flash[:notice] %>
                 </div>
             <% end %>
+            
+            <div class="page2">
+                <%= paginate @posts %>
+            </div>
             <% if @posts.any? %>
                 <% @posts.each do |post| %>
                     <div class="card">
@@ -41,6 +42,15 @@
                             </div>
                         </div>
                         <div class="content text-dark">
+                            <% if post.reposts.any? %>
+                                <ul>
+                                    <% post.reposts.each do |repost| %>
+                                        <li>
+                                            <%= repost.user.username %> さんが <%= post.user.username %> さんの投稿をリポストしました
+                                        </li>
+                                    <% end %>
+                                </ul>
+                            <% end %>
                             <div><%= post.content %></div>
                             <% post.tags.each do |tag| %>
                                 <%= tag.tag_name %>

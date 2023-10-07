@@ -7,6 +7,8 @@ class Post < ApplicationRecord
     has_many :tags, through: :tag_maps
     has_many :notifications, dependent: :destroy
     
+    attr_accessor :reposts
+    
     validates :content, presence: true, length: {minimum: 1, maximum: 150}
 
     
