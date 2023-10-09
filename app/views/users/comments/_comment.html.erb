@@ -12,8 +12,10 @@
                 <% end %>
                 <div class="font">
                     <% if comment.user == current_user %>
-                        <%= link_to post_comment_path(comment.post, comment), method: :delete, remote: true do %>
-                            <i class="fa-solid fa-trash-can"></i>
+                        <% if comment.id.present? %>
+                            <%= link_to post_comment_path(comment.post, comment), method: :delete, remote: true do %>
+                                <i class="fa-solid fa-trash-can"></i>
+                            <% end %>
                         <% end %>
                     <% end %>
                 </div>

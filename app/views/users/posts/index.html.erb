@@ -46,7 +46,7 @@
                                 <ul>
                                     <% post.reposts.each do |repost| %>
                                         <li>
-                                            <%= repost.user.username %> さんが <%= post.user.username %> さんの投稿をリポストしました
+                                            <%= link_to "#{repost.user.name} さん", user_path(repost.user.id) %> が投稿をリポストしました
                                         </li>
                                     <% end %>
                                 </ul>

@@ -5,7 +5,11 @@ class Users::CommentsController < ApplicationController
         comment = @post.comments.new(comment_params)
         comment.post_id = @post.id
         comment.user_id = current_user.id
-        comment.save
+        if comment.save
+            flash[:reply] = 'Successfully replied.'
+        else
+            flash[:reply] = 'Reply failed.'
+        end
         
         notification = Notification.new(:visitor_id=>current_user.id,:visited_id => @post.user_id,:post_id => @post.id,:comment_id=>comment.id,:action=>'comment',:checked =>false)
         notification.save!
