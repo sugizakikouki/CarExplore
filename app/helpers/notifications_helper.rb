@@ -10,9 +10,11 @@ module NotificationsHelper
       tag.a(notification.visitor.name, href: user_path(@visitor)) + 'が' + tag.a('あなたの投稿', href: post_path(notification.post_id)) + 'にいいねしました'
     when 'comment'
       @comment = Comment.find_by(id: @visitor_comment)
-      @comment_content = @comment.comment
-      @micropost_title = @comment.post.content
-      tag.a(@visitor.name, href: user_path(@visitor)) + 'が' + tag.a('あなたの投稿', href: post_path(notification.post_id)) + 'にコメントしました'
+      if @comment
+        @comment_content = @comment.comment
+        @micropost_title = @comment.post.content
+        tag.a(@visitor.name, href: user_path(@visitor)) + 'が' + tag.a('あなたの投稿', href: post_path(notification.post_id)) + 'にコメントしました'
+      end
     end
   end
 end

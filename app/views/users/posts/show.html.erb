@@ -2,8 +2,8 @@
   <div class="row">
     <div class="col-md-8">
         <div class="flex mx-auto">
-            <div id="comments_error">
-                <%= render '/users/shared/error_massages', model: @comment %>
+            <div id="error_explanation" class="text-light">
+                <%= render "users/shared/error_messages", object: @comment %>
             </div>
             
             <div class="card mt-4 mx-3">

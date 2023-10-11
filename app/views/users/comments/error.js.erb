@@ -1,1 +1,2 @@
-$("#comments_error").html("<%= j(render '/users/shared/error_massages', model: @comment) %>");
+$("#error_explanation").html("<%= j(render 'users/shared/error_messages', object: @comment) %>");
+
