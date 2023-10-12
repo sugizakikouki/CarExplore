@@ -69,3 +69,6 @@ gem 'mini_magick'
 gem 'haml-rails'
 gem 'kaminari','~> 1.2.1'
 gem 'ransack'
+gem 'rubocop', require: false
+gem 'rubocop-performance', require: false
+gem 'rubocop-rails', require: false

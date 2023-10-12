@@ -1,6 +1,6 @@
 module ApplicationHelper
     def custom_date_format(date)
-        current_time = Time.now
+        current_time = Time.zone.now
         if date > current_time - 24.hours
             # 投稿が24時間以内の場合、時間のみを表示
             date.strftime("%k時%M分")

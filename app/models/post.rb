@@ -35,7 +35,7 @@ class Post < ApplicationRecord
     
     def self.search(keyword)
         Post.joins(:user, :tags)
-            .where("content LIKE ? or users.username LIKE ? or users.name LIKE ? or tags.tag_name LIKE ?", "%#{sanitize_sql_like(keyword)}%", "%#{sanitize_sql_like(keyword)}%", "%#{sanitize_sql_like(keyword)}%", "%#{sanitize_sql_like(keyword)}%")
+          .where("content LIKE ? or users.username LIKE ? or users.name LIKE ? or tags.tag_name LIKE ?", "%#{sanitize_sql_like(keyword)}%", "%#{sanitize_sql_like(keyword)}%", "%#{sanitize_sql_like(keyword)}%", "%#{sanitize_sql_like(keyword)}%")
     end
     
     def create_notification_favorite(current_user)

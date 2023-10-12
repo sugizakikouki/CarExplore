@@ -9,21 +9,20 @@ class User < ApplicationRecord
   has_many :comments, dependent: :destroy
   has_many :favorites, dependent: :destroy
   mount_uploader :image, ImageUploader
-  has_many :followers, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy
-  has_many :followeds, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy
+  has_many :followers, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy, inverse_of: :follower
+  has_many :followeds, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy, inverse_of: :followed
 
   has_many :following_users, through: :followers, source: :followed
   has_many :follower_users, through: :followeds, source: :follower
   
-  has_many :reposts, class_name: 'Post', foreign_key: 'repost_id'
+  has_many :reposts, class_name: 'Post', foreign_key: 'repost_id', dependent: :destroy, inverse_of: :user
   
-  has_many :active_notifications, class_name: "Notification", foreign_key:"visitor_id", dependent: :destroy
-  has_many :passive_notifications, class_name: "Notification", foreign_key:"visited_id", dependent: :destroy
+  has_many :active_notifications, class_name: "Notification", foreign_key:"visitor_id", dependent: :destroy, inverse_of: :visitor
+  has_many :passive_notifications, class_name: "Notification", foreign_key:"visited_id", dependent: :destroy, inverse_of: :visited
   
   validates :name, presence: true, uniqueness: true, length: {minimum: 1, maximum: 10}
   validates :username, presence: true, uniqueness: true, length: {minimum: 1, maximum: 10}, format: { with: /\A@.+/, message: "は@から始めてください" }
   validates :email, uniqueness: true, presence: true
-  
   
   paginates_per 10
 
