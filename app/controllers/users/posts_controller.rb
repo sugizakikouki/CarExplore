@@ -15,7 +15,8 @@ class Users::PostsController < ApplicationController
     @posts = @posts.order(created_at: :desc).page(params[:page])
     # 各投稿に対するリポスト情報を含める
     @posts.each do |post|
-      post.reposts = Post.where(repost_id: post.id)
+      post.reposts = Post.where(id: post.repost_id) unless post.repost_id.nil?
+      # post.reposts = Post.where(repost_id: post.id)
     end
   end
 

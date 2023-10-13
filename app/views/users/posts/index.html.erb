@@ -42,11 +42,11 @@
                             </div>
                         </div>
                         <div class="content text-dark">
-                            <% if post.reposts.any? %>
+                            <% if post.reposts %>
                                 <ul>
                                     <% post.reposts.each do |repost| %>
                                         <li>
-                                            <%= link_to "#{repost.user.name} さん", user_path(repost.user.id) %> が投稿をリポストしました
+                                            <%= link_to "#{repost.user.name} さん", user_path(repost.user.id) %> の投稿をリポストしました
                                         </li>
                                     <% end %>
                                 </ul>
