@@ -10,6 +10,7 @@ body {
   font-family: 'Open Sans', sans-serif;
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
 }
 
 a {
@@ -504,13 +505,20 @@ position: absolute;
   width: 60%;
 }
 
+header{
+  position: fixed;
+  z-index: 100;
+  width: 100%;
+}
+
 .navbar{
   padding-left: 20%;
 }
 
+
+
 .flex,
 .card{
-  width: 500px;
   align-items: center;
   margin-bottom: 25px;
 }
@@ -547,7 +555,7 @@ position: absolute;
   left: 0;
   text-align: center;
   top: 0;
-  width: inherit;
+  width: 100%;
   display: flex;
 }
 

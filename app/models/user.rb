@@ -1,69 +1,68 @@
 class User < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable
+    # Include default devise modules. Others available are:
+    # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
+    devise :database_authenticatable, :registerable,
+        :recoverable, :rememberable, :validatable
        
-  has_many_attached :images
-  has_many :posts, dependent: :destroy
-  has_many :comments, dependent: :destroy
-  has_many :favorites, dependent: :destroy
-  mount_uploader :image, ImageUploader
-  has_many :followers, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy, inverse_of: :follower
-  has_many :followeds, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy, inverse_of: :followed
+    has_many_attached :images
+    has_many :posts, dependent: :destroy
+    has_many :comments, dependent: :destroy
+    has_many :favorites, dependent: :destroy
+    mount_uploader :image, ImageUploader
+    has_many :followers, class_name: "Relationship", foreign_key: "follower_id", dependent: :destroy, inverse_of: :follower
+    has_many :followeds, class_name: "Relationship", foreign_key: "followed_id", dependent: :destroy, inverse_of: :followed
 
-  has_many :following_users, through: :followers, source: :followed
-  has_many :follower_users, through: :followeds, source: :follower
+    has_many :following_users, through: :followers, source: :followed
+    has_many :follower_users, through: :followeds, source: :follower
   
-  has_many :reposts, class_name: 'Post', foreign_key: 'repost_id', dependent: :destroy, inverse_of: :user
+    has_many :reposts, class_name: 'Post', foreign_key: 'repost_id', dependent: :destroy, inverse_of: :user
   
-  has_many :active_notifications, class_name: "Notification", foreign_key:"visitor_id", dependent: :destroy, inverse_of: :visitor
-  has_many :passive_notifications, class_name: "Notification", foreign_key:"visited_id", dependent: :destroy, inverse_of: :visited
+    has_many :active_notifications, class_name: "Notification", foreign_key:"visitor_id", dependent: :destroy, inverse_of: :visitor
+    has_many :passive_notifications, class_name: "Notification", foreign_key:"visited_id", dependent: :destroy, inverse_of: :visited
+
+    validates :name, presence: true, uniqueness: true, length: { minimum: 1, maximum: 10 }
+    validates :username, presence: true, uniqueness: true, length: { minimum: 1, maximum: 10 }, format: { with: /\A@.+/, message: "は@から始めてください" }
+    validates :email, uniqueness: true, presence: true
   
-  validates :name, presence: true, uniqueness: true, length: {minimum: 1, maximum: 10}
-  validates :username, presence: true, uniqueness: true, length: {minimum: 1, maximum: 10}, format: { with: /\A@.+/, message: "は@から始めてください" }
-  validates :email, uniqueness: true, presence: true
-  
-  paginates_per 10
+    paginates_per 10
 
          
-  def self.guest
-    find_or_create_by!(email: 'guest@guest.com') do |user|
-      user.password = SecureRandom.urlsafe_base64
-      user.name = "ゲストユーザー"
+    def self.guest
+        find_or_create_by!(email: 'guest@guest.com') do |user|
+            user.password = SecureRandom.urlsafe_base64
+            user.name = "ゲストユーザー"
+        end
     end
-  end
   
-  def follow(user_id)
-    followers.create(followed_id: user_id)
-  end
+    def follow(user_id)
+        followers.create(followed_id: user_id)
+    end
 
-  def unfollow(user_id)
-    followers.find_by(followed_id: user_id).destroy
-  end
+    def unfollow(user_id)
+        followers.find_by(followed_id: user_id).destroy
+    end
 
-  def following?(user)
-    following_users.include?(user)
-  end
+    def following?(user)
+        following_users.include?(user)
+    end
   
-  def posts_with_reposts
-    # ユーザーの投稿とリポストを取得するロジックを追加
-    posts = self.posts.limit(10)
-    reposts = self.reposts.limit(10)
+    def posts_with_reposts
+        # ユーザーの投稿とリポストを取得するロジックを追加
+        posts = self.posts.limit(10)
+        reposts = self.reposts.limit(10)
     
-    # 投稿とリポストを合成してソート
-    all_posts = (posts + reposts).sort_by(&:created_at).reverse
+        # 投稿とリポストを合成してソート
+        all_posts = (posts + reposts).sort_by(&:created_at).reverse
 
-    return Kaminari.paginate_array(all_posts).page(1).per(10)
-  end
+        return Kaminari.paginate_array(all_posts).page(1).per(10)
+    end
   
   
-  def create_notification_follow(current_user)
-    notification = current_user.active_notifications.new(
-      visited_id: id, 
-      action: 'follow'
-    )
-    notification.save if notification.valid?
-  end
-
+    def create_notification_follow(current_user)
+        notification = current_user.active_notifications.new(
+            visited_id: id, 
+            action: 'follow'
+        )
+        notification.save if notification.valid?
+    end
 end

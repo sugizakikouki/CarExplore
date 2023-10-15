@@ -1,93 +1,93 @@
 <% if flash[:success] %>
-  <div class="alert alert-success">
-    <%= flash[:success] %>
-  </div>
+    <div class="alert alert-success">
+        <%= flash[:success] %>
+    </div>
 <% end %>
 <% if flash[:alert] %>
-  <div class="alert alert-danger">
-    <%= flash[:alert] %>
-  </div>
+    <div class="alert alert-danger">
+        <%= flash[:alert] %>
+    </div>
 <% end %>
 
 <div class="container1">
-  <div class="row">
-    <div class="col-md-6">
-      <div class="window">
-        <div class="overlay"></div>
-        <div class="box header">
-          <%= image_tag @user.image_url %>
-          <h2><%= @user.name %></h2>
-          <h4><%= @user.profile %></h4>
-          <ul>
-            <li><%= @user.posts.count %> post</li>
-            <li><%= @user.followers.count %> follower</li>
-            <li><%= @user.followeds.count %> follow</li>
-          </ul>
-        </div>
-
-        <div class="box footer">
-          <% if current_user != @user %>
-            <% if current_user.following?(@user) %>
-              <%= link_to "unfollow", user_relationships_path(@user.id), method: :delete, class: "btn btn-danger" %>
-            <% else %>
-              <%= link_to "follow", user_relationships_path(@user.id), method: :post, class: "btn btn-success" %>
-            <% end %>
-          <% end %>
-          <div class="btn"><%= link_to "Edit", edit_user_path %></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="col-md-6 text-light">
-      <div class="page mt-4">
-        <%= paginate @post_all %>
-      </div>
-      <div class="flex">
-        <% if @post_all.any? %>
-          <% @post_all.each do |post| %>
-            <div class="card">
-              <div class="plf">
-                <%= link_to user_path(post.user.id) do %>
-                  <span><%= image_tag post.user.image_url %></span>
-                  <span class="name"><%= @user.name %></span>
-                  <span class="name"><%= @user.username %></span>
-                  <span class="name"><%= custom_date_format(post.created_at) %></span>
-                <% end %>
-                <div class="font">
-                  <i class="fa-regular fa-comments"></i>
-                  <%= post.comments.count %>
-                  <%= link_to post_path(post), method: :get do %>
-                    <i class="fa-solid fa-check"></i>
-                  <% end %>
-                  <%= link_to reposts_path(repost_id: post.id), method: :get do %>
-                    <i class="fa-solid fa-retweet"></i>
-                  <% end %>
-                  <% if post.user == current_user %>
-                    <%= link_to post_path(post), method: :delete do %>
-                      <i class="fa-solid fa-trash-can"></i>
-                    <% end %>
-                  <% end %>
+    <div class="row">
+        <div class="col-md-6 center-block mt-5">
+            <div class="window mt-3">
+                <div class="overlay"></div>
+                <div class="box header">
+                    <%= image_tag @user.image_url %>
+                    <h2><%= @user.name %></h2>
+                    <h4><%= @user.profile %></h4>
+                    <ul>
+                        <li><%= @user.posts.count %> post</li>
+                        <li><%= @user.followers.count %> follower</li>
+                        <li><%= @user.followeds.count %> follow</li>
+                    </ul>
                 </div>
-              </div>
-              <div class="content text-dark">
-                <div><%= post.content %></div>
-                <% post.tags.each do |tag| %>
-                  <%= tag.tag_name %>
-                <% end %>
-                <% if post.images.attached? %>
-                  <div class="image-container">
-                    <% post.images.each do |image| %>
-                      <%= image_tag image, class: 'img-fluid', loading: 'lazy' %>
+
+                <div class="box footer">
+                    <% if current_user != @user %>
+                        <% if current_user.following?(@user) %>
+                            <%= link_to "unfollow", user_relationships_path(@user.id), method: :delete, class: "btn btn-danger" %>
+                        <% else %>
+                            <%= link_to "follow", user_relationships_path(@user.id), method: :post, class: "btn btn-success" %>
+                        <% end %>
                     <% end %>
-                  </div>
-                <% end %>
-              </div>
+                    <div class="btn"><%= link_to "Edit", edit_user_path %></div>
+                </div>
             </div>
-          <% end %>
-        <% else %>
-          <div>No posts found.</div>
-        <% end %>
-      </div>
+        </div>
+
+        <div class="col-md-6 center-block text-light mt-5">
+            <div class="page mt-4">
+                <%= paginate @post_all %>
+            </div>
+            <div class="flex mx-5 mt-3">
+                <% if @post_all.any? %>
+                    <% @post_all.each do |post| %>
+                    <div class="card">
+                        <div class="plf">
+                            <%= link_to user_path(post.user.id) do %>
+                                <span><%= image_tag post.user.image_url %></span>
+                                <span class="name"><%= @user.name %></span>
+                                <span class="name"><%= @user.username %></span>
+                                <span class="name"><%= custom_date_format(post.created_at) %></span>
+                            <% end %>
+                            <div class="font">
+                                <i class="fa-regular fa-comments"></i>
+                                <%= post.comments.count %>
+                                <%= link_to post_path(post), method: :get do %>
+                                    <i class="fa-solid fa-check"></i>
+                                <% end %>
+                                <%= link_to reposts_path(repost_id: post.id), method: :get do %>
+                                    <i class="fa-solid fa-retweet"></i>
+                                <% end %>
+                                <% if post.user == current_user %>
+                                    <%= link_to post_path(post), method: :delete do %>
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    <% end %>
+                                <% end %>
+                            </div>
+                        </div>
+                        <div class="content text-dark">
+                        <div><%= post.content %></div>
+                            <% post.tags.each do |tag| %>
+                                <%= tag.tag_name %>
+                            <% end %>
+                            <% if post.images.attached? %>
+                                <div class="image-container">
+                                    <% post.images.each do |image| %>
+                                        <%= image_tag image, class: 'img-fluid', loading: 'lazy' %>
+                                    <% end %>
+                                </div>
+                            <% end %>
+                        </div>
+                    </div>
+                <% end %>
+                <% else %>
+                    <div>No posts found.</div>
+                <% end %>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
