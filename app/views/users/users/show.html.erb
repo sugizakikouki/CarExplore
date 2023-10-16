@@ -9,9 +9,9 @@
     </div>
 <% end %>
 
-<div class="container1">
+<div class="container-fluid">
     <div class="row">
-        <div class="col-md-6 center-block mt-5">
+        <div class="col-md-3" style="margin-top: 125px">
             <div class="window mt-3">
                 <div class="overlay"></div>
                 <div class="box header">
@@ -38,11 +38,11 @@
             </div>
         </div>
 
-        <div class="col-md-6 center-block text-light mt-5">
+        <div class="col-md-8 text-light" style="margin-top: 125px">
             <div class="page mt-4">
                 <%= paginate @post_all %>
             </div>
-            <div class="flex mx-5 mt-3">
+            <div class="flex mx-5">
                 <% if @post_all.any? %>
                     <% @post_all.each do |post| %>
                     <div class="card">

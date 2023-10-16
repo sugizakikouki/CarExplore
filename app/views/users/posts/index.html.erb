@@ -1,9 +1,9 @@
 <div class="search">
     <%= render "search", post: @post %>
 </div>
-<div class="container1">
+<div class="container-fluid">
   <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-8" style="margin-top: 125px">
         
         <div class="flex mx-auto text-light">
             <% if flash[:notice] %>
@@ -70,7 +70,7 @@
             <% end %>
         </div>
     </div>
-    <div class="col-md-3 col-md-offset-1 text-light">
+    <div class="col-md-3 col-md-offset-1 text-light" style="margin-top: 125px">
         <%= form_with model: Post.new do |f| %>
             <%= render "users/shared/error_messages", object: Post.new %>
             <div class="mt-3">
